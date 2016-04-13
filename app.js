@@ -20,15 +20,15 @@ router
   .get('/save', saveCat)
   .get('/list', listCat)
   .post('/add', addCat)
-  .get('/get4', get4);
+  .get('/get6', get6);
 
 app
   .use(router.routes())
   .use(router.allowedMethods());
 
-async function get4(ctx) {
+async function get6(ctx) {
     const cet4 = [];
-    const res = await request('https://www.shanbay.com/wordbook/6091/');
+    const res = await request('https://www.shanbay.com/wordbook/2');
     const body = res.body;
     let $ = cheerio.load(body);
     const menuList = $(".wordbook-create-candidate-wordlist");
@@ -36,7 +36,7 @@ async function get4(ctx) {
 
     for (let i = 0; i < menuList.length; i++) {
         const wordListUrl = $('.wordbook-wordlist-name a', $(menuList[i])).attr('href');
-        for(let j = 0; j< 10; j++){
+        for(let j = 1; j<=10; j++){
             const wordRes = await request('https://www.shanbay.com'+wordListUrl+'?page='+j);
             const WordListbody = wordRes.body;
             $ = cheerio.load(WordListbody);
